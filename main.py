@@ -52,7 +52,7 @@ def my_chatbot(language, style, freeform_text):
 st.title("Bedrock Chatbot")
 
 language = st.sidebar.selectbox("Language", ["English", "Spanish", "Korean"])
-style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Barack Obama", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Donald Trump"])
+style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Barack Obama", "Donald Trump", "Joe Biden" ])
 
 if language:
     freeform_text = st.sidebar.text_area(label="What is your question?", max_chars=100)  # save money don't put in too much context
