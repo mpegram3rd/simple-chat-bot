@@ -48,8 +48,6 @@ def my_chatbot(language, style, freeform_text):
     return response
 
 
-#print(my_chatbot("english", "Who is Buddah?"))
-
 #streamlit super simple website
 st.title("Bedrock Chatbot")
 
