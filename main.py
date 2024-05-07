@@ -25,15 +25,20 @@ llm = BedrockLLM(
     # settings to can send into the model
     # max_tokens can be moved up or down to change cost
     # temperature impacts the amount of "creativity" the model is allowed.
-    model_kwargs={"max_tokens_to_sample": 2000, "temperature": 0.9}
+    model_kwargs={"max_tokens_to_sample": 200, "temperature": 0.9}
 )
 
 
-def my_chatbot(language, freeform_text):
+def my_chatbot(language, style, freeform_text):
+
+    in_the_style_of = ""
+    if style:
+        in_the_style_of = f"in the style of {style}"
+
     # prompt template lets you structure a prompt in a cookie cutter way
     prompt = PromptTemplate(
         input_variables=["language", "freeform_text"],
-        template=f"You are a chat bot. You are in {language}.\n\n{freeform_text}"
+        template=f"You are a chat bot answer {in_the_style_of}. You are in {language}.\n\n{freeform_text}"
     )
 
     bedrock_chain = prompt | llm
@@ -42,4 +47,18 @@ def my_chatbot(language, freeform_text):
 
     return response
 
-print(my_chatbot("english", "How many tablespoons of minced garlic is equivalent to 3 cloves?"))
+
+#print(my_chatbot("english", "Who is Buddah?"))
+
+#streamlit super simple website
+st.title("Bedrock Chatbot")
+
+language = st.sidebar.selectbox("Language", ["English", "Spanish", "Korean"])
+style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Barack Obama", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Donald Trump"])
+
+if language:
+    freeform_text = st.sidebar.text_area(label="What is your question?", max_chars=100)  # save money don't put in too much context
+
+if freeform_text:
+    response = my_chatbot(language, style, freeform_text)
+    st.write(response)
