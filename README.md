@@ -6,15 +6,11 @@ This is a simple question/answer chat bot using the following tech stack:
 - [Langchain](https://www.langchain.com/langchain): For interacting with the model and hopefully chat memory later
 - [Streamlit](https://docs.streamlit.io/): For simple Web UI
 
-## Setup
-```
-pip3 install boto3
-pip3 install langchain
-pip3 install langchain-aws
-pip3 install streanlit
-```
+## Setup / Running
+Initial Setup:
+`pip3 install -r requirements.txt`
 
-## Running
+Running the app:
 `python3 -m streamlit run main.py`
 
 ## Credits
