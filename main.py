@@ -21,7 +21,7 @@ modelID = "anthropic.claude-v2:1"
 llm = BedrockLLM(
     model_id=modelID,
     client=bedrock_client,
-    # settings to can send into the model
+    # settings you can send into the model
     # max_tokens can be moved up or down to change cost
     # temperature impacts the amount of "creativity" the model is allowed.
     model_kwargs={"max_tokens_to_sample": 200, "temperature": 0.9}
