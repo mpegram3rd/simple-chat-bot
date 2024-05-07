@@ -36,7 +36,7 @@ def my_chatbot(language, style, freeform_text):
     # prompt template lets you structure a prompt in a cookie cutter way
     prompt = PromptTemplate(
         input_variables=["language", "freeform_text"],
-        template=f"You are a chat bot answer {in_the_style_of}. You are in {language}.\n\n{freeform_text}"
+        template=f"You are a chat bot answer {in_the_style_of}. You are responding in {language}.\n\n{freeform_text}"
     )
 
     bedrock_chain = prompt | llm
