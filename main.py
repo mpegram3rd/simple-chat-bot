@@ -1,5 +1,4 @@
-from langchain.chains import LLMChain
-from langchain.llms.bedrock import Bedrock
+from langchain_aws import BedrockLLM
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 import boto3
@@ -20,7 +19,7 @@ modelID = "anthropic.claude-v2:1"
 # Called "langchain" because you can chain together prompts and dbs you're going to reference or web scrapers, etc.
 # recommend starting with that framework.
 
-llm = Bedrock(
+llm = BedrockLLM(
     model_id=modelID,
     client=bedrock_client,
     # settings to can send into the model
@@ -37,9 +36,9 @@ def my_chatbot(language, freeform_text):
         template=f"You are a chat bot. You are in {language}.\n\n{freeform_text}"
     )
 
-    bedrock_chain = LLMChain(llm=llm, prompt=prompt)
+    bedrock_chain = prompt | llm
 
-    response = bedrock_chain({'language': language, 'freeform_text': freeform_text})
+    response = bedrock_chain.invoke({'language': language, 'freeform_text': freeform_text})
 
     return response
 
