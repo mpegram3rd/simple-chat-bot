@@ -1,8 +1,7 @@
 from langchain_aws import BedrockLLM
-from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
+from langchain.callbacks.tracers import ConsoleCallbackHandler
 import boto3
-import os
 import streamlit as st
 
 # bedrock client - Credit: https://www.youtube.com/watch?v=E1-mUfpeRu0
@@ -43,7 +42,8 @@ def my_chatbot(language, style, freeform_text):
 
     bedrock_chain = prompt | llm
 
-    response = bedrock_chain.invoke({'language': language, 'freeform_text': freeform_text})
+    response = bedrock_chain.invoke({'language': language, 'freeform_text': freeform_text},
+                                    config={'callbacks': [ConsoleCallbackHandler()]})
 
     return response
 
@@ -52,7 +52,7 @@ def my_chatbot(language, style, freeform_text):
 st.title("Bedrock Chatbot")
 
 language = st.sidebar.selectbox("Language", ["English", "Spanish", "French", "Korean"])
-style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Barack Obama", "Donald Trump", "Joe Biden" ])
+style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Barack Obama", "Donald Trump", "Joe Biden"])
 
 if language:
     freeform_text = st.sidebar.text_area(label="What is your question?", max_chars=100)  # save money don't put in too much context
