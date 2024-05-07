@@ -11,6 +11,7 @@ bedrock_client = boto3.client(
     region_name="us-east-1"
 )
 
+# Which foundation model to use
 modelID = "anthropic.claude-v2:1"
 
 # langchain
