@@ -51,7 +51,7 @@ def my_chatbot(language, style, freeform_text):
 #streamlit super simple website
 st.title("Bedrock Chatbot")
 
-language = st.sidebar.selectbox("Language", ["English", "Spanish", "Korean"])
+language = st.sidebar.selectbox("Language", ["English", "Spanish", "French", "Korean"])
 style = st.sidebar.selectbox("Style", ["", "Dad Joke", "Mark Twain", "Bugs Bunny", "Elmer Fudd", "Barack Obama", "Donald Trump", "Joe Biden" ])
 
 if language:
