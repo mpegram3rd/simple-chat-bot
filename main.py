@@ -36,14 +36,13 @@ def my_chatbot(language, style, freeform_text):
 
     # prompt template lets you structure a prompt in a cookie cutter way
     prompt = PromptTemplate(
-        input_variables=["language", "freeform_text"],
+        input_variables=["language", "freeform_text", "in_the_style_of"],
         template=f"You are a chat bot answer {in_the_style_of}. You are responding in {language}.\n\n{freeform_text}"
     )
 
     bedrock_chain = prompt | llm
 
-    response = bedrock_chain.invoke({'language': language, 'freeform_text': freeform_text},
-                                    config={'callbacks': [ConsoleCallbackHandler()]})  # logging hook
+    response = bedrock_chain.invoke({}, config={'callbacks': [ConsoleCallbackHandler()]})  # logging hook
 
     return response
 
